@@ -4,22 +4,16 @@
 
 #include "DynamicEnum.h"
 
-index_t DynamicEnum::Get(string name) {
+index_t DynamicEnum::Get(string name)
+{
 	auto result = Find(name);
 
-	if (result != -1)
-	{
-		return (index_t)result;
-	}
-	else
-	{
-		throw std::invalid_argument("name was not valid enumeration");
-	}
-
+	return BaseGet(result);
 }
 
-int DynamicEnum::Find(string name) {
-	for (index_t index = 0; index < raw.size(); index++)
+int DynamicEnum::Find(string name, index_t start)
+{
+	for (index_t index = start; index < raw.size(); index++)
 	{
 		if (raw[index] == name)
 		{
@@ -30,11 +24,13 @@ int DynamicEnum::Find(string name) {
 	return -1;
 }
 
-string DynamicEnum::Get(index_t enumeration) {
+string DynamicEnum::Get(index_t enumeration)
+{
 	return raw[enumeration];
 }
 
-void DynamicEnum::Set(string name, index_t enumeration) {
+void DynamicEnum::Set(string name, index_t enumeration)
+{
 	if (enumeration < raw.size())
 	{
 		raw[enumeration] = name;
@@ -46,7 +42,8 @@ void DynamicEnum::Set(string name, index_t enumeration) {
 	}
 }
 
-index_t DynamicEnum::Add(string name) {
+index_t DynamicEnum::Add(string name)
+{
 	auto enumeration = raw.size();
 
 	raw.push_back(name);
@@ -54,7 +51,8 @@ index_t DynamicEnum::Add(string name) {
 	return enumeration;
 }
 
-DynamicEnum::DynamicEnum(vector<string> value) : raw(value) {
+DynamicEnum::DynamicEnum(vector<string> value) : raw(value)
+{
 }
 
 unsigned int DynamicEnum::Size()
