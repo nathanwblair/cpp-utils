@@ -118,6 +118,13 @@ public:
 	string Get(index_t enumeration);
 
 
+	bool Has(index_t enumeration)
+	{
+		if (enumeration < raw.size())
+			return Get(enumeration) != "";
+	}
+
+
 	void Set(string name, index_t enumeration);
 
 
